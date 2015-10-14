@@ -1,0 +1,31 @@
+{
+  "name": "nodepedia",
+  "description": "An encyclopedia-like CMS using Markdown and express.js",
+  "version": "0.0.1",
+  "maintainers": [
+    {
+      "name": "Arthur Silber",
+      "email": "info@arthursilber.de",
+      "web": "arthursilber.de"
+    }
+  ],
+  "repositories": [
+    {
+      "type": "git",
+      "url": "git@github.com:AtiX/nodepedia.git"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/AtiX/nodepedia/issues"
+  },
+  "scripts": {
+    "start": "node ./main.js",
+    "test": "./node_modules/.bin/mocha --bail --compilers coffee:coffee-script/register --recursive"
+  },
+  "dependencies": {
+    "coffee-script": "~1.10.0"
+  },
+  "devDependencies": {
+  	"mocha": "~2.3.3"
+  }
+}
