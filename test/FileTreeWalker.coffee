@@ -38,8 +38,10 @@ describe 'FileTreeWalker', ->
       walkPromise = walkPromise.then (result) ->
         expect(result.files.length).to.equal(2)
         expect(result.subdirs.length).to.equal(2)
-        expect(result.files).to.eql(['fileA', 'fileB'])
-        expect(result.subdirs).to.eql(['subA', 'subB'])
+        expect(result.files.indexOf('fileA') >= 0).to.be.true
+        expect(result.files.indexOf('fileB') >= 0).to.be.true
+        expect(result.subdirs.indexOf('subA') >= 0).to.be.true
+        expect(result.subdirs.indexOf('subB') >= 0).to.be.true
         done()
       walkPromise = walkPromise.catch (error) -> done(error)
       return walkPromise
