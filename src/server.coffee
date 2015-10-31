@@ -6,9 +6,20 @@ graph = new NodeGraph({ path: './sampleGraphData'})
 graph.registerParser('MarkdownParser')
 graph.load()
 .then (rootNode) ->
-  console.log 'Tree view:'
+  console.log 'All nodes as a tree:'
   console.log ''
   printTree 0, rootNode
+
+  console.log ''
+  console.log 'All nodes as merged objects:'
+  console.log ''
+
+  leaves = rootNode.getAllLeaves()
+  documents = leaves.map (node) -> node.flattenProperties()
+
+  for doc in documents
+    console.log JSON.stringify(doc)
+    console.log ''
 
 # Print the created tree somehow nicely
 printTree = (indentation, node) ->
