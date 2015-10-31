@@ -13,8 +13,19 @@ graph.load()
 # Print the created tree somehow nicely
 printTree = (indentation, node) ->
   printIndentated indentation, '--( ) Node:'
-  printIndentated indentation, "   |  dirName:  #{node.getProperty('dirName')}"
-  printIndentated indentation, "   |  fullPath: #{node.getProperty('fullPath')}"
+
+  node.forEachProperty (key, value) ->
+    if 'object' != typeof value
+      valueStr = value.toString()
+    else
+      valueStr = JSON.stringify(value)
+
+    if valueStr.length > 50
+      valueStr = valueStr.substring(0,50)
+      valueStr += '...'
+
+    printIndentated indentation, "   |  #{key}: #{valueStr}"
+
   printIndentated indentation, '   |'
 
   indentation++
