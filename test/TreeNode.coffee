@@ -98,3 +98,21 @@ describe 'TreeNode', ->
     }
 
     expect(merged).to.eql(expectedMerged)
+
+  it 'should return all leaves', ->
+    parent = new TreeNode()
+    sub0 = parent.addNewChild()
+    sub1 = parent.addNewChild()
+    sub10 = sub1.addNewChild()
+    sub2 = parent.addNewChild()
+    sub20 = sub2.addNewChild()
+    sub21 = sub2.addNewChild()
+
+    leaves = parent.getAllLeaves()
+
+    expect(leaves.length).to.equal(4)
+    expect(leaves.indexOf(sub0) >= 0).to.be.true
+    expect(leaves.indexOf(sub10) >= 0).to.be.true
+    expect(leaves.indexOf(sub20) >= 0).to.be.true
+    expect(leaves.indexOf(sub21) >= 0).to.be.true
+

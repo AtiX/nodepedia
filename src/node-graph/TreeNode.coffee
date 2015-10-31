@@ -73,3 +73,20 @@ module.exports = class TreeNode
 
     return mergedProperties
 
+  ##
+  # Returns all children or sub-children that do not have
+  # child nodes of their own
+  # @returns {TreeNode[]} array filled with all leaves
+  getAllLeaves: =>
+    leaves = []
+
+    _addLeaves = (node) ->
+      if node.children.length == 0
+        leaves.push node
+      else
+        for child in node.children
+          _addLeaves child
+
+    _addLeaves(@)
+
+    return leaves
