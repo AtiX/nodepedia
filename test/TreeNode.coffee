@@ -61,3 +61,40 @@ describe 'TreeNode', ->
       else
         throw new Error("Unexpected key")
 
+  it 'should flatten properties with the "childWins" strategy', ->
+    parent = new TreeNode()
+    child = parent.addNewChild()
+
+    parent.setProperty 'p', 0
+    parent.setProperty 'a', 1
+    child.setProperty 'a', 2
+    child.setProperty 'c', 3
+
+    merged = child.flattenProperties 'childWins'
+
+    expectedMerged = {
+      p: 0
+      a: 2
+      c: 3
+    }
+
+    expect(merged).to.eql(expectedMerged)
+
+  it 'should flatten properties with the "parentWins" strategy', ->
+    parent = new TreeNode()
+    child = parent.addNewChild()
+
+    parent.setProperty 'p', 0
+    parent.setProperty 'a', 1
+    child.setProperty 'a', 2
+    child.setProperty 'c', 3
+
+    merged = child.flattenProperties 'parentWins'
+
+    expectedMerged = {
+      p: 0
+      a: 1
+      c: 3
+    }
+
+    expect(merged).to.eql(expectedMerged)

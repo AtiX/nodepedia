@@ -55,3 +55,21 @@ module.exports = class TreeNode
     for key, value of @properties
       callback(key, value)
 
+  ##
+  # Merges the properties of all parents and this
+  # node into an object, which is then returned
+  # @param {String} mergeStrategy either 'childWins' or 'parentWins', determines which property value to use if both parent and child have it
+  flattenProperties: (mergeStrategy = 'childWins') =>
+    mergedProperties = {}
+    if @parent?
+      mergedProperties = @parent.flattenProperties mergeStrategy
+    
+    @forEachProperty (key, value) =>
+      if mergedProperties[key]?
+        if mergeStrategy == 'childWins'
+          mergedProperties[key] = value
+      else
+        mergedProperties[key] = value
+
+    return mergedProperties
+
