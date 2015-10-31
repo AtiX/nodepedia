@@ -1,1 +1,2 @@
-// empty at the moment
+require('coffee-script').register()
+require('./src/server')
