@@ -48,4 +48,10 @@ module.exports = class TreeNode
       return @parent.getProperty key, true
     return null
 
+  ##
+  # Iterates over all own properties
+  # @param {Function} callback the callback gets called with (key, value) for each property
+  forEachProperty: (callback) =>
+    for key, value of @properties
+      callback(key, value)
 

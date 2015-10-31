@@ -41,3 +41,23 @@ describe 'TreeNode', ->
     expect(child.getProperty('parentkey', true)).to.be.null
     parent.setProperty 'parentkey', 'parentvalue'
     expect(child.getProperty('parentkey', true)).to.equals('parentvalue')
+
+  it 'should iterate over own properties', ->
+    node = new TreeNode()
+
+    node.setProperty 'a', 'b'
+    node.setProperty 'c', 'd'
+
+    aCalled = false
+    cCalled = false
+
+    node.forEachProperty (key, value) ->
+      if key == 'a'
+        aCalled = true
+        expect(value).to.equal('b')
+      else if key == 'c'
+        cCalled = true
+        expect(value).to.equal('d')
+      else
+        throw new Error("Unexpected key")
+
