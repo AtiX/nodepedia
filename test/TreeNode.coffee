@@ -99,6 +99,59 @@ describe 'TreeNode', ->
 
     expect(merged).to.eql(expectedMerged)
 
+  it 'should merge arrays', ->
+    parent = new TreeNode()
+    child = parent.addNewChild()
+
+    parent.setProperty 'array', ['a', 'b']
+    child.setProperty 'array', ['c', 'd']
+
+    merged = child.flattenProperties 'parentWins'
+
+    expectedMerged = {
+      array: ['a', 'b', 'c', 'd']
+    }
+
+    expect(merged).to.eql(expectedMerged)
+
+  it 'should merge objects (parentWins)', ->
+    parent = new TreeNode()
+    child = parent.addNewChild()
+
+    parent.setProperty 'object', {a: 'parentValue1', b: 'parentValue2'}
+    child.setProperty 'object', {a: 'childValue1', c: 'childValue2'}
+
+    merged = child.flattenProperties 'parentWins'
+
+    expectedMerged = {
+      object: {
+        a: 'parentValue1'
+        b: 'parentValue2'
+        c: 'childValue2'
+      }
+    }
+
+    expect(merged).to.eql(expectedMerged)
+
+  it 'should merge objects (childWins)', ->
+    parent = new TreeNode()
+    child = parent.addNewChild()
+
+    parent.setProperty 'object', {a: 'parentValue1', b: 'parentValue2'}
+    child.setProperty 'object', {a: 'childValue1', c: 'childValue2'}
+
+    merged = child.flattenProperties 'childWins'
+
+    expectedMerged = {
+      object: {
+        a: 'childValue1'
+        b: 'parentValue2'
+        c: 'childValue2'
+      }
+    }
+
+    expect(merged).to.eql(expectedMerged)
+
   it 'should return all leaves', ->
     parent = new TreeNode()
     sub0 = parent.addNewChild()

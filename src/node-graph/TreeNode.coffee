@@ -1,3 +1,5 @@
+underscore = require 'underscore'
+
 ##
 # A node in the tree datastructure.
 # mainly consists out of helper functions
@@ -61,17 +63,60 @@ module.exports = class TreeNode
   # @param {String} mergeStrategy either 'childWins' or 'parentWins', determines which property value to use if both parent and child have it
   flattenProperties: (mergeStrategy = 'childWins') =>
     mergedProperties = {}
+
+    parentProperties = {}
     if @parent?
-      mergedProperties = @parent.flattenProperties mergeStrategy
-    
+      parentProperties = @parent.flattenProperties mergeStrategy
+
+    # Go through child properties and merge with parent
     @forEachProperty (key, value) =>
-      if mergedProperties[key]?
-        if mergeStrategy == 'childWins'
-          mergedProperties[key] = value
-      else
+      mergedProperties[key] = @_mergeIndividualProperty(parentProperties[key], value, mergeStrategy)
+
+    # Go through all keys of the parent that do not exist in the child
+    for key, value of parentProperties
+      if not mergedProperties[key]?
         mergedProperties[key] = value
 
     return mergedProperties
+
+  ##
+  # Merges an individual property
+  _mergeIndividualProperty: (parentValue, childValue, mergeStrategy) =>
+    # if the parent value is not defined, use child value
+    if not parentValue?
+      return childValue
+
+    # Basic objects like strings and numbers are overwritten
+    if underscore.isString(childValue) or underscore.isNumber(childValue)
+      if mergeStrategy == 'childWins'
+        return childValue
+      else
+        return parentValue
+
+    # Array elements are combined (parent values first)
+    if underscore.isArray(childValue)
+      return parentValue.concat(childValue)
+
+    # Objects are merged by combining keys. Duplicate keys are overwritten
+    # based on the merge strategy
+    if underscore.isObject(childValue)
+      base = {}
+      merge = {}
+
+      if mergeStrategy == 'childWins'
+        base = underscore.clone(parentValue)
+        merge = underscore.clone(childValue)
+      else
+        base = underscore.clone(childValue)
+        merge = underscore.clone(parentValue)
+
+      for key, value of merge
+        base[key] = value
+
+      return base
+
+    # All cases should be covered above
+    throw new Error("_mergeIndividualProperty failed to merge an unknown object type")
 
   ##
   # Returns all children or sub-children that do not have
