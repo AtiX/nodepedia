@@ -1,7 +1,7 @@
 {
   "name": "nodepedia",
   "description": "An encyclopedia-like CMS using Markdown and express.js",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "maintainers": [
     {
       "name": "Arthur Silber",
