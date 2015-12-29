@@ -4,6 +4,7 @@ NodeGraph = require './node-graph/NodeGraph'
 
 graph = new NodeGraph({ path: './sampleGraphData'})
 graph.registerParser('MarkdownParser')
+graph.registerParser('YamlParser')
 graph.load()
 .then (rootNode) ->
   console.log 'All nodes as a tree:'
