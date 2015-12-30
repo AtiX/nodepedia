@@ -1,7 +1,7 @@
 chai = require 'chai'
 expect = chai.expect
 
-TreeNode = require '../src/node-graph/TreeNode.coffee'
+TreeNode = require '../src/fsgdb/TreeNode.coffee'
 
 describe 'TreeNode', ->
   it 'should add a new child and link parent and child', ->

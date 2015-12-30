@@ -4,8 +4,8 @@ path = require 'path'
 
 testUtilities = require './testUtilities'
 
-YamlParser = require '../src/node-graph/parser/YamlParser.coffee'
-TreeNode = require '../src/node-graph/TreeNode.coffee'
+YamlParser = require '../src/fsgdb/parser/YamlParser.coffee'
+TreeNode = require '../src/fsgdb/TreeNode.coffee'
 
 testPath = undefined
 

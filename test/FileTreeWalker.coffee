@@ -5,8 +5,8 @@ fs = require 'fs'
 
 testUtilities = require './testUtilities'
 
-FileTreeWalker = require '../src/node-graph/FileTreeWalker.coffee'
-TreeNode = require '../src/node-graph/TreeNode.coffee'
+FileTreeWalker = require '../src/fsgdb/FileTreeWalker.coffee'
+TreeNode = require '../src/fsgdb/TreeNode.coffee'
 
 testPath = undefined
 

@@ -1,9 +1,8 @@
 FileTreeWalker = require './FileTreeWalker'
 
 ##
-# This class represents the whole nodepedia instance
-# @class Nodepedia
-module.exports = class NodeGraph
+# This class represents the database instance
+module.exports = class FileSystemGraphDatabase
 
   ##
   # Expects an config object

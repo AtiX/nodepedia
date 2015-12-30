@@ -1,8 +1,8 @@
 # For now, only a test script that logs the created graph to the console
 
-NodeGraph = require './node-graph/NodeGraph'
+FileSystemGraphDatabase = require './fsgdb/FileSystemGraphDatabase'
 
-graph = new NodeGraph({ path: './sampleGraphData'})
+graph = new FileSystemGraphDatabase({ path: './sampleGraphData'})
 graph.registerParser('MarkdownParser')
 graph.registerParser('YamlParser')
 graph.load()
