@@ -30,7 +30,7 @@
     "marked": "^0.3.5",
     "rimraf": "^2.4.3",
     "underscore": "^1.8.3",
-    "fsgdb":"0.1.1"
+    "fsgdb":"0.2.0"
   },
   "devDependencies": {
     "mocha": "~2.3.3",
