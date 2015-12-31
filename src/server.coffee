@@ -1,6 +1,6 @@
 # For now, only a test script that logs the created graph to the console
 
-FileSystemGraphDatabase = require './fsgdb/FileSystemGraphDatabase'
+FileSystemGraphDatabase = require 'fsgdb'
 
 graph = new FileSystemGraphDatabase({ path: './sampleGraphData'})
 graph.registerParser('MarkdownParser')
