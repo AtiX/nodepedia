@@ -29,7 +29,8 @@
     "js-yaml": "^3.4.6",
     "marked": "^0.3.5",
     "rimraf": "^2.4.3",
-    "underscore": "^1.8.3"
+    "underscore": "^1.8.3",
+    "fsgdb":"0.1.1"
   },
   "devDependencies": {
     "mocha": "~2.3.3",
